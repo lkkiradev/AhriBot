@@ -35,88 +35,6 @@ LOADING_MESSAGES = [
     "Gathering vision from wards... stay tuned!"
 ]
 
-def landing_page():
-    if 'landing_shown' not in st.session_state or not st.session_state.landing_shown:
-        st.markdown(f"""
-        <div class="welcome">
-            <img src="data:image/png;base64,{img2}">
-            <h1>I'm Ahri, your Nine-Tailed Fox Assistant.</h1>
-        </div>
-        """, unsafe_allow_html=True)
-
-        st.markdown(f"""
-        <style>
-         @import url('https://fonts.cdnfonts.com/css/sk-concretica');
-         @import url('https://fonts.cdnfonts.com/css/pp-neue-montreal');
-         @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
-         .welcome h1 {{
-             font-family: 'SK Concretica', sans-serif;
-             font-size: clamp(2rem, 3.5vw, 4rem);
-             font-weight: 'lighter';
-             opacity: 0;
-             animation: fadeIN 4s ease-out forwards;
-         }}
-
-         .st-emotion-cache-fm8pe0 p {{
-             font-family: 'SK Concretica', sans-serif;
-             background: linear-gradient(45deg, rgb(234, 255, 43), rgb(7, 165, 204), rgb(48, 189, 255));
-             animation: gradientAnimation 4s ease infinite;
-             background-clip: text;
-             background-size:300%;
-             -webkit-background-clip: text;
-             -webkit-text-fill-color: transparent;
-         }}
-
-         .st-emotion-cache-rqk8r5:hover {{
-             background: black;
-         }}
-
-         .st-emotion-cache-rqk8r5:active {{
-             background: black;  /* Corrected "clack" to "black" */
-         }}
-
-         @keyframes gradientAnimation {{
-             0% {{
-                 background-position: 0% 50%;
-             }}
-             50% {{
-                 background-position: 100% 50%;
-             }}
-             100% {{
-                 background-position: 0% 50%;
-             }}
-         }}
-
-         @keyframes fadeIN {{
-             from {{
-                 opacity: 0;
-             }}
-             to {{
-                 opacity: 1;
-             }}
-         }}
-
-         @keyframes blink {{
-             50% {{
-                 border-color: transparent;
-             }}
-         }}
-        </style>
-        """, unsafe_allow_html=True)
-
-        if st.button("Summoner, what's your next move? ⚔️"):
-            st.empty()
-            st.session_state.landing_shown = True
-
-            chain=show_upload_documents()
-            show_message_history()
-            show_chat_input(chain)
-    else:
-        chain=show_upload_documents()
-        show_message_history()
-        show_chat_input(chain)
-  
 
 @st.cache_data
 def get_img_as_base64(file):
@@ -130,7 +48,7 @@ def get_font_as_base64(font):
         e_font = base64.b64encode(data).decode('utf-8')
     return e_font
 
-img = get_img_as_base64("../images/backg.png")
+img = get_img_as_base64("images/backg.png")
 img2 = get_img_as_base64("images/assistant-avatar.png")
 headerfont = get_font_as_base64("images/MBFManata.ttf")
 
@@ -391,6 +309,8 @@ with st.container():
         unsafe_allow_html=True
     )
 
-landing_page()
+chain=show_upload_documents()
+show_message_history()
+show_chat_input(chain)
 
 
