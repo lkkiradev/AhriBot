@@ -21,7 +21,7 @@ class Config:
         TEMPERATURE = 1.0
         MAX_TOKENS = 8000
         USE_LOCAL = False
-        GROQ_API_KEY = "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"
+        GROQ_API_KEY = "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"
 
     class Retriever:
         USE_RERANKER = True
